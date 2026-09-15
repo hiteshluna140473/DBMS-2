@@ -1,0 +1,28 @@
+CREATE TABLE EMP (
+    EMP_ID NUMBER(5),
+    EMP_NAME VARCHAR2(30),
+    SALARY NUMBER(10,2)
+);
+
+INSERT INTO EMP VALUES (101, 'Hitesh', 25000);
+INSERT INTO EMP VALUES (102, 'Rahul', 30000);
+INSERT INTO EMP VALUES (103, 'Amit', 28000);
+
+COMMIT;
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_name EMP.EMP_NAME%TYPE;
+BEGIN
+    SELECT EMP_NAME INTO v_name
+    FROM EMP
+    WHERE EMP_ID = 999;
+
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Error: No record found for the given criteria.');
+END;
+/
